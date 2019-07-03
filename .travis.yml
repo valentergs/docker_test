@@ -9,21 +9,22 @@ script:
   # "-e CI=true" é usado para que quando o teste termine o Travis saia do modo teste
   - docker run -e CI=true valentergs/docker-react npm run test -- --coverage
 # Entrar informação criada pelo Elasticbeanstalk
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "sa-east-1"
-#   app: "docker-react"
-#   env: "DockerReact-env"
-#   # Essa informação pode ser encontrada no AWS S3
-#   bucket_name: "elasticbeanstalk-sa-east-1-340831665464"
-#   # Mesmo nome do app acima
-#   bucket_path: "docker-react"
-#   on:
-#     branch: master
-#   # Ambas as chaves abaixo são geradas pelo IAM do AWS e armazenadas pelo Travis CI
-#   # Dentro do AWS-IAM criar um novo usuário: por exemplo, docker-react-travis-ci, apenas com acesso programático. Depois anexar alguma politica de acesso.
+deploy:
+  provider: elasticbeanstalk
+  region: "sa-east-1"
+  app: "docker_test"
+  env: "DockerTest-env"
+  # Essa informação pode ser encontrada no AWS S3
+  bucket_name: "elasticbeanstalk-sa-east-1-340831665464"
 
-#   # Armazenar as chaves geradas automaticamente pelo AWS Beanstalk dentro settings do Travis CI
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key:
-#     secure: "$AWS_SECRET_KEY"
+  # Mesmo nome do app acima
+  bucket_path: "docker_test"
+  on:
+    branch: master
+  # Ambas as chaves abaixo são geradas pelo IAM do AWS e armazenadas pelo Travis CI
+  # Dentro do AWS-IAM criar um novo usuário: por exemplo, docker-react-travis-ci, apenas com acesso programático. Depois anexar alguma politica de acesso.
+
+  # Armazenar as chaves geradas automaticamente pelo AWS Beanstalk dentro settings do Travis CI
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
