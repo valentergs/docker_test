@@ -3,11 +3,11 @@ services:
   - docker
 
 before_install:
-  - docker build -t docker_test Dockerfile .
+  - docker build -t valentergs/docker-react -f Dockerfile.dev .
 
 script:
   # "-e CI=true" é usado para que quando o teste termine o Travis saia do modo teste
-  - docker run -e CI=true docker_test npm run test -- --coverage
+  - docker run -e CI=true valentergs/docker-react npm run test -- --coverage
 # Entrar informação criada pelo Elasticbeanstalk
 deploy:
   provider: elasticbeanstalk
